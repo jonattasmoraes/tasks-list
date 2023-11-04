@@ -3,34 +3,47 @@ import Task from '../../models/Tasks'
 
 import * as enums from '../../utils/enums/tasks'
 
+type TaskState = {
+  items: Task[]
+}
+
+const initialState: TaskState = {
+  items: [
+    {
+      id: 1,
+      description:
+        'Estudar React Native e Typescript ambos no mudúlo 17 do curso de TS',
+      priority: enums.priority.NORMAL,
+      status: enums.status.DONE,
+      title: 'Estudar React Native e Typescript'
+    },
+    {
+      id: 2,
+      description:
+        'Estudar loops while e for em Python, aulas do mudúlo 23 do curso',
+      priority: enums.priority.NORMAL,
+      status: enums.status.PENDING,
+      title: 'Estudar Python'
+    },
+    {
+      id: 3,
+      description:
+        'Estudar aulas do modúlo 30 do curso de Java e conferir anotações',
+      priority: enums.priority.NORMAL,
+      status: enums.status.PENDING,
+      title: 'Estudar Java'
+    }
+  ]
+}
+
 const tasksSlice = createSlice({
   name: 'tasks',
-  initialState: [
-    new Task(
-      'Estudar Javascript',
-      enums.priority.IMPORTANT,
-      enums.status.PENDING,
-      '',
-      1
-    ),
-    new Task(
-      'Estudar Java',
-      enums.priority.URGENT,
-      enums.status.DONE,
-      'Rever aula dois do mudúlo sobre classes Java',
-      2
-    ),
-    new Task(
-      'Estudar Python',
-      enums.priority.IMPORTANT,
-      enums.status.PENDING,
-      'Estudar loops e condicionais',
-      3
-    )
-  ],
+  initialState,
   reducers: {
     remove: (state, action: PayloadAction<number>) => {
-      state = state.filter((task) => task.id !== action.payload)
+      state.items = [
+        ...state.items.filter((task) => task.id !== action.payload)
+      ]
     }
   }
 })

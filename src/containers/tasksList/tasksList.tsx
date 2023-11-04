@@ -6,7 +6,7 @@ import { Container } from '../tasksList/styles'
 import { RootReducer } from '../../store'
 
 const TasksList = () => {
-  const { tasks } = useSelector((state: RootReducer) => state)
+  const { items } = useSelector((state: RootReducer) => state.tasks)
 
   return (
     <Container>
@@ -14,10 +14,11 @@ const TasksList = () => {
         2 Tarefas marcadas como: &quot;categoria&ldquo; e &quot;termo&ldquo;
       </p>
       <ul>
-        {tasks.map((t) => (
+        {items.map((t) => (
           <li key={t.title}>
             <Task
-              description={t.Description}
+              id={t.id}
+              description={t.description}
               title={t.title}
               status={t.status}
               priority={t.priority}
