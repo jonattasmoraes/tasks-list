@@ -1,18 +1,35 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import * as S from './style'
 
-import * as enums from '../../utils/enums/tasks'
-
-import { remove } from '../../store/reducers/tasks'
+import { remove, edit } from '../../store/reducers/tasks'
 import TaskClass from '../../models/Tasks'
 
 type Props = TaskClass
 
-const Task = ({ title, priority, status, description, id }: Props) => {
+const Task = ({
+  description: OriginalDescription,
+  priority,
+  status,
+  title,
+  id
+}: Props) => {
   const dispatch = useDispatch()
   const [itsEditing, setItsEditing] = useState(false)
+  const [description, setDescription] = useState('')
+
+  useEffect(() => {
+    if (OriginalDescription.length > 0) {
+      setDescription(OriginalDescription)
+    }
+  }, [OriginalDescription])
+
+  function cancelEditing() {
+    setItsEditing(false)
+    setDescription(OriginalDescription)
+  }
+
   return (
     <S.Card>
       <S.Title>{title}</S.Title>
@@ -22,12 +39,31 @@ const Task = ({ title, priority, status, description, id }: Props) => {
       <S.Tag parameter="status" status={status}>
         {status}
       </S.Tag>
-      <S.Description value={description} />
+      <S.Description
+        disabled={!itsEditing}
+        value={description}
+        onChange={(event) => setDescription(event.target.value)}
+      />
       <S.ActionsBar>
         {itsEditing ? (
           <>
-            <S.ButtonSave>Salvar</S.ButtonSave>
-            <S.ButtonCancelRemove onClick={() => setItsEditing(false)}>
+            <S.ButtonSave
+              onClick={() => {
+                dispatch(
+                  edit({
+                    description,
+                    priority,
+                    status,
+                    title,
+                    id
+                  })
+                )
+                setItsEditing(false)
+              }}
+            >
+              Salvar
+            </S.ButtonSave>
+            <S.ButtonCancelRemove onClick={cancelEditing}>
               Cancelar
             </S.ButtonCancelRemove>
           </>
