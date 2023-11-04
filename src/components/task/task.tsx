@@ -5,7 +5,7 @@ import * as S from './style'
 
 import { remove, edit, changeStatus } from '../../store/reducers/tasks'
 import TaskClass from '../../models/Tasks'
-import { ButtonSave } from '../../styles'
+import { Button, ButtonSave } from '../../styles'
 
 import * as enums from '../../utils/enums/tasks'
 
@@ -92,7 +92,7 @@ const Task = ({
           </>
         ) : (
           <>
-            <S.Button onClick={() => setItsEditing(true)}>Editar</S.Button>
+            <Button onClick={() => setItsEditing(true)}>Editar</Button>
             <S.ButtonCancelRemove onClick={() => dispatch(remove(id))}>
               Remover
             </S.ButtonCancelRemove>

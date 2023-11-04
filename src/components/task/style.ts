@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import variables from '../../styles/variables'
 
 import * as enums from '../../utils/enums/tasks'
+import { Button } from '../../styles'
 
 type TagProps = {
   priority?: enums.priority
@@ -69,18 +70,6 @@ export const Description = styled.textarea`
 export const ActionsBar = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 16px;
-`
-
-export const Button = styled.button`
-  font-weight: bold;
-  font-size: 12px;
-  padding: 8px 12px;
-  border: none;
-  cursor: pointer;
-  background-color: #2f3640;
-  color: #fff;
-  border-radius: 8px;
-  margin-right: 8px;
 `
 
 export const ButtonCancelRemove = styled(Button)`

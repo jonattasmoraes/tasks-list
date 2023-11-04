@@ -23,10 +23,17 @@ const FormAddTask = () => {
       priority,
       enums.status.PENDING,
       description,
-      9
+      1
     )
 
-    dispatch(register(taskToAdd))
+    dispatch(
+      register({
+        title,
+        priority,
+        description,
+        status: enums.status.PENDING
+      })
+    )
     navigate('/')
   }
 

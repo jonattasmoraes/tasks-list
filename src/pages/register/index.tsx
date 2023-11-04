@@ -3,7 +3,7 @@ import SideBar from '../../containers/sidebar/sidebar'
 
 const Register = () => (
   <>
-    <SideBar />
+    <SideBar showFilters={false} />
     <Form />
   </>
 )
