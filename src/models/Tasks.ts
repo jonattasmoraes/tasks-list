@@ -4,7 +4,7 @@ class Task {
   title: string
   priority: enums.priority
   status: enums.status
-  Description: string
+  description: string
   id: number
 
   constructor(
@@ -17,7 +17,7 @@ class Task {
     this.title = title
     this.priority = priority
     this.status = status
-    this.Description = description
+    this.description = description
     this.id = id
   }
 }
